@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.11.9)  13 NOV 2018 16:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.11.9)  14 NOV 2018 14:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -892,80 +892,123 @@ Overfull \hbox (7.43388pt too wide) in paragraph at lines 424--425
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[16 <./github-init-repo-2.png>] [17] (./1.aux) ) 
+[16 <./github-init-repo-2.png>]
+<study_git.png, id=231, 510.90875pt x 174.6525pt>
+File: study_git.png Graphic file (type png)
+ <use study_git.png>
+Package pdftex.def Info: study_git.png used on input line 447.
+(pdftex.def)             Requested size: 306.5476pt x 104.7923pt.
+
+<head1.png, id=232, 302.12875pt x 151.56625pt>
+File: head1.png Graphic file (type png)
+ <use head1.png>
+Package pdftex.def Info: head1.png used on input line 455.
+(pdftex.def)             Requested size: 181.27864pt x 90.94044pt.
+ [17 <./study_git.png>] <head2.png, id=238, 368.37625pt x 233.87375pt>
+File: head2.png Graphic file (type png)
+ <use head2.png>
+Package pdftex.def Info: head2.png used on input line 460.
+(pdftex.def)             Requested size: 221.02744pt x 140.32532pt.
+
+<head3.png, id=239, 495.8525pt x 233.87375pt>
+File: head3.png Graphic file (type png)
+ <use head3.png>
+Package pdftex.def Info: head3.png used on input line 465.
+(pdftex.def)             Requested size: 297.5138pt x 140.32532pt.
+
+<head4.png, id=240, 424.58624pt x 222.8325pt>
+File: head4.png Graphic file (type png)
+ <use head4.png>
+Package pdftex.def Info: head4.png used on input line 469.
+(pdftex.def)             Requested size: 254.75371pt x 133.70053pt.
+ [18 <./head1.png> <./head2.png> <./head3.png>] <head5.png, id=247, 424.58624pt
+ x 159.59625pt>
+File: head5.png Graphic file (type png)
+
+<use head5.png>
+Package pdftex.def Info: head5.png used on input line 475.
+(pdftex.def)             Requested size: 254.75371pt x 95.75847pt.
+ [19 <./head4.png> <./head5.png>]
+<head6.png, id=254, 420.57124pt x 222.8325pt>
+File: head6.png Graphic file (type png)
+ <use head6.png>
+Package pdftex.def Info: head6.png used on input line 528.
+(pdftex.def)             Requested size: 252.3447pt x 133.70053pt.
+ [20 <./head6.png>] [21] [22] (./1.aux) ) 
 Here is how much of TeX's memory you used:
- 8005 strings out of 493029
- 102657 string characters out of 6136234
+ 8156 strings out of 493029
+ 104687 string characters out of 6136234
  199370 words of memory out of 5000000
- 11198 multiletter control sequences out of 15000+600000
- 42687 words of font info for 151 fonts, out of 8000000 for 9000
+ 11338 multiletter control sequences out of 15000+600000
+ 43459 words of font info for 154 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,6n,49p,1488b,2410s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-sl10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></u
-sr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu30.pfb></usr/share/texmf/fonts/typ
-e1/arphic/gbsnu/gbsnu4e.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu4f.
-pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu50.pfb></usr/share/texmf/fo
-nts/type1/arphic/gbsnu/gbsnu51.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/g
-bsnu52.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu53.pfb></usr/share/t
-exmf/fonts/type1/arphic/gbsnu/gbsnu54.pfb></usr/share/texmf/fonts/type1/arphic/
-gbsnu/gbsnu55.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu56.pfb></usr/
-share/texmf/fonts/type1/arphic/gbsnu/gbsnu57.pfb></usr/share/texmf/fonts/type1/
-arphic/gbsnu/gbsnu58.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu59.pfb
-></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu5a.pfb></usr/share/texmf/fonts
-/type1/arphic/gbsnu/gbsnu5b.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsn
-u5c.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu5d.pfb></usr/share/texm
-f/fonts/type1/arphic/gbsnu/gbsnu5e.pfb></usr/share/texmf/fonts/type1/arphic/gbs
-nu/gbsnu5f.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu60.pfb></usr/sha
-re/texmf/fonts/type1/arphic/gbsnu/gbsnu61.pfb></usr/share/texmf/fonts/type1/arp
-hic/gbsnu/gbsnu62.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu63.pfb></
-usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu64.pfb></usr/share/texmf/fonts/ty
-pe1/arphic/gbsnu/gbsnu65.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu66
-.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu67.pfb></usr/share/texmf/f
-onts/type1/arphic/gbsnu/gbsnu68.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/
-gbsnu69.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu6a.pfb></usr/share/
-texmf/fonts/type1/arphic/gbsnu/gbsnu6b.pfb></usr/share/texmf/fonts/type1/arphic
-/gbsnu/gbsnu6c.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu6d.pfb></usr
-/share/texmf/fonts/type1/arphic/gbsnu/gbsnu6e.pfb></usr/share/texmf/fonts/type1
-/arphic/gbsnu/gbsnu70.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu71.pf
-b></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu72.pfb></usr/share/texmf/font
-s/type1/arphic/gbsnu/gbsnu73.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbs
-nu74.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu75.pfb></usr/share/tex
-mf/fonts/type1/arphic/gbsnu/gbsnu76.pfb></usr/share/texmf/fonts/type1/arphic/gb
-snu/gbsnu77.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu78.pfb></usr/sh
-are/texmf/fonts/type1/arphic/gbsnu/gbsnu79.pfb></usr/share/texmf/fonts/type1/ar
-phic/gbsnu/gbsnu7a.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu7b.pfb><
-/usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu7c.pfb></usr/share/texmf/fonts/t
-ype1/arphic/gbsnu/gbsnu7d.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu7
-e.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu7f.pfb></usr/share/texmf/
-fonts/type1/arphic/gbsnu/gbsnu80.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu
-/gbsnu81.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu82.pfb></usr/share
-/texmf/fonts/type1/arphic/gbsnu/gbsnu83.pfb></usr/share/texmf/fonts/type1/arphi
-c/gbsnu/gbsnu84.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu85.pfb></us
-r/share/texmf/fonts/type1/arphic/gbsnu/gbsnu86.pfb></usr/share/texmf/fonts/type
-1/arphic/gbsnu/gbsnu87.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu88.p
-fb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu89.pfb></usr/share/texmf/fon
-ts/type1/arphic/gbsnu/gbsnu8b.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gb
-snu8c.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu8d.pfb></usr/share/te
-xmf/fonts/type1/arphic/gbsnu/gbsnu8e.pfb></usr/share/texmf/fonts/type1/arphic/g
-bsnu/gbsnu8f.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu90.pfb></usr/s
-hare/texmf/fonts/type1/arphic/gbsnu/gbsnu91.pfb></usr/share/texmf/fonts/type1/a
-rphic/gbsnu/gbsnu94.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu95.pfb>
-</usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu96.pfb></usr/share/texmf/fonts/
-type1/arphic/gbsnu/gbsnu97.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu
-98.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu99.pfb></usr/share/texmf
-/fonts/type1/arphic/gbsnu/gbsnu9a.pfb></usr/share/texmf/fonts/type1/arphic/gbsn
-u/gbsnu9e.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnuff.pfb>
-Output written on 1.pdf (17 pages, 882556 bytes).
+ 38i,6n,49p,2191b,2929s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/shar
+e/texmf/fonts/type1/arphic/gbsnu/gbsnu30.pfb></usr/share/texmf/fonts/type1/arph
+ic/gbsnu/gbsnu4e.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu4f.pfb></u
+sr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu50.pfb></usr/share/texmf/fonts/typ
+e1/arphic/gbsnu/gbsnu51.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu52.
+pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu53.pfb></usr/share/texmf/fo
+nts/type1/arphic/gbsnu/gbsnu54.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/g
+bsnu55.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu56.pfb></usr/share/t
+exmf/fonts/type1/arphic/gbsnu/gbsnu57.pfb></usr/share/texmf/fonts/type1/arphic/
+gbsnu/gbsnu58.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu59.pfb></usr/
+share/texmf/fonts/type1/arphic/gbsnu/gbsnu5a.pfb></usr/share/texmf/fonts/type1/
+arphic/gbsnu/gbsnu5b.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu5c.pfb
+></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu5d.pfb></usr/share/texmf/fonts
+/type1/arphic/gbsnu/gbsnu5e.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsn
+u5f.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu60.pfb></usr/share/texm
+f/fonts/type1/arphic/gbsnu/gbsnu61.pfb></usr/share/texmf/fonts/type1/arphic/gbs
+nu/gbsnu62.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu63.pfb></usr/sha
+re/texmf/fonts/type1/arphic/gbsnu/gbsnu64.pfb></usr/share/texmf/fonts/type1/arp
+hic/gbsnu/gbsnu65.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu66.pfb></
+usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu67.pfb></usr/share/texmf/fonts/ty
+pe1/arphic/gbsnu/gbsnu68.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu69
+.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu6a.pfb></usr/share/texmf/f
+onts/type1/arphic/gbsnu/gbsnu6b.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/
+gbsnu6c.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu6d.pfb></usr/share/
+texmf/fonts/type1/arphic/gbsnu/gbsnu6e.pfb></usr/share/texmf/fonts/type1/arphic
+/gbsnu/gbsnu70.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu71.pfb></usr
+/share/texmf/fonts/type1/arphic/gbsnu/gbsnu72.pfb></usr/share/texmf/fonts/type1
+/arphic/gbsnu/gbsnu73.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu74.pf
+b></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu75.pfb></usr/share/texmf/font
+s/type1/arphic/gbsnu/gbsnu76.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbs
+nu77.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu78.pfb></usr/share/tex
+mf/fonts/type1/arphic/gbsnu/gbsnu79.pfb></usr/share/texmf/fonts/type1/arphic/gb
+snu/gbsnu7a.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu7b.pfb></usr/sh
+are/texmf/fonts/type1/arphic/gbsnu/gbsnu7c.pfb></usr/share/texmf/fonts/type1/ar
+phic/gbsnu/gbsnu7d.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu7e.pfb><
+/usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu7f.pfb></usr/share/texmf/fonts/t
+ype1/arphic/gbsnu/gbsnu80.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu8
+1.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu82.pfb></usr/share/texmf/
+fonts/type1/arphic/gbsnu/gbsnu83.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu
+/gbsnu84.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu85.pfb></usr/share
+/texmf/fonts/type1/arphic/gbsnu/gbsnu86.pfb></usr/share/texmf/fonts/type1/arphi
+c/gbsnu/gbsnu87.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu88.pfb></us
+r/share/texmf/fonts/type1/arphic/gbsnu/gbsnu89.pfb></usr/share/texmf/fonts/type
+1/arphic/gbsnu/gbsnu8b.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu8c.p
+fb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu8d.pfb></usr/share/texmf/fon
+ts/type1/arphic/gbsnu/gbsnu8e.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gb
+snu8f.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu90.pfb></usr/share/te
+xmf/fonts/type1/arphic/gbsnu/gbsnu91.pfb></usr/share/texmf/fonts/type1/arphic/g
+bsnu/gbsnu94.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu95.pfb></usr/s
+hare/texmf/fonts/type1/arphic/gbsnu/gbsnu96.pfb></usr/share/texmf/fonts/type1/a
+rphic/gbsnu/gbsnu97.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu98.pfb>
+</usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu99.pfb></usr/share/texmf/fonts/
+type1/arphic/gbsnu/gbsnu9a.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu
+9e.pfb></usr/share/texmf/fonts/type1/arphic/gbsnu/gbsnu9f.pfb></usr/share/texmf
+/fonts/type1/arphic/gbsnu/gbsnuff.pfb>
+Output written on 1.pdf (22 pages, 999214 bytes).
 PDF statistics:
- 491 PDF objects out of 1000 (max. 8388607)
- 291 compressed objects within 3 object streams
+ 528 PDF objects out of 1000 (max. 8388607)
+ 306 compressed objects within 4 object streams
  0 named destinations out of 1000 (max. 500000)
- 360 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 399 words of extra memory for PDF output out of 10000 (max. 10000000)
 
