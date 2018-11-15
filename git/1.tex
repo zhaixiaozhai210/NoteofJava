@@ -1,0 +1,845 @@
+%--------------------------------------------------------------------------
+% 导入宏包
+%--------------------------------------------------------------------------
+\documentclass[•]{article}
+\usepackage{CJKutf8}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{listings}%在Latex中插入代码块
+
+%---------------------------------------------------------------------------
+%文字超出边界的处理方法
+\usepackage[textwidth=14.5cm]{geometry}
+\usepackage{blindtext}  
+\parindent=0pt  
+%---------------------------------------------------------------------------
+
+%--------------------------------------给文字加背景色--------------------------------
+\usepackage{framed}
+\colorlet{shadecolor}{gray!20}
+%----------------------------------------------------------------------------------
+
+%----------------------------------在Latex中插入代码块-------------------------------------
+\lstset{
+    basicstyle=\tt,
+    %行号
+    numbers=left,
+    rulesepcolor=\color{red!20!green!20!blue!20},
+    escapeinside=``,
+    xleftmargin=2em,xrightmargin=2em, aboveskip=1em,
+    %背景框
+    framexleftmargin=1.5mm,
+    frame=shadowbox,
+    %背景色
+    backgroundcolor=\color[RGB]{245,245,244},
+    %样式
+    keywordstyle=\color{blue}\bfseries,
+    identifierstyle=\bf,
+    numberstyle=\color[RGB]{0,192,192},
+    commentstyle=\it\color[RGB]{96,96,96},
+    stringstyle=\rmfamily\slshape\color[RGB]{128,0,0},
+    %显示空格
+    showstringspaces=false
+}
+
+%-------------------------------------总标题-------------------------------------
+\title{Git}
+%-------------------------------------latex上下间距-------------------------------------
+\renewcommand{\baselinestretch}{1.5}
+\begin{document}
+\begin{CJK}{UTF8}{gbsn}
+%-------------------------------------显示标题-------------------------------------
+\maketitle
+
+\section{Git简介}
+\begin{center}
+\includegraphics[scale=0.4]{0.jpeg}
+\end{center}
+
+\qquad \textbf{Git}是目前世界上最先进的分布式版本控制系统（没有之一）。Git有什么特点？简单来说就是：高端大气上档次！
+
+\qquad \textcolor{red}{那什么是版本控制系统？}
+
+\qquad 如果你用Microsoft Word写过长篇大论，那你一定有这样的经历：想删除一个段落，又怕将来想恢复找不回来怎么办？有办法，先把当前文件“另存为……”一个新的Word文件，再接着改，改到一定程度，再“另存为……”一个新文件，这样一直改下去，最后你的Word文档变成了这样：
+\begin{center}
+\includegraphics[scale=0.4]{1.jpeg}
+\end{center}
+
+\qquad 过了一周，你想找回被删除的文字，但是已经记不清删除前保存在哪个文件里了，只好一个一个文件去找，真麻烦。
+
+\qquad 看着一堆乱七八糟的文件，想保留最新的一个，然后把其他的删掉，又怕哪天会用上，还不敢删，真郁闷。
+
+\qquad 更要命的是，有些部分需要你的财务同事帮助填写，于是你把文件Copy到U盘里给她（也可能通过Email发送一份给她），然后，你继续修改Word文件。一天后，同事再把Word文件传给你，此时，你必须想想，发给她之后到你收到她的文件期间，你作了哪些改动，得把你的改动和她的部分合并，真困难。
+
+\qquad 于是你想，如果有一个软件，不但能自动帮我记录每次文件的改动，还可以让同事协作编辑，这样就不用自己管理一堆类似的文件了，也不需要把文件传来传去。如果想查看某次改动，只需要在软件里瞄一眼就可以，岂不是很方便？
+
+\qquad 这个软件用起来就应该像这个样子，能记录每次文件的改动：\\
+\begin{center}
+\begin{tabular}{ccccc}
+\hline
+版本& 文件名& 用户& 说明& 日期\\
+\hline
+1& service.doc& Male& 删除了软件服务条款5& 7/12 10:38\\
+2& service.doc& Bill&  	增加了License人数限制& 7/12 10:38\\
+3& service.doc& Steve& 删除了软件服务条款5& 7/12 10:38\\
+4& service.doc& Jobs& 财务部门调整了合同金额& 7/12 10:38\\
+5& service.doc& Gates& 延长了免费升级周期& 7/12 10:38\\
+\hline\\
+\end{tabular}
+\end{center}
+
+\qquad 这样，你就结束了手动管理多个“版本”的史前时代，进入到版本控制的20世纪。
+
+\subsection{Git的诞生}
+
+\qquad{很多人都知道，Linus在1991年创建了开源的Linux，从此，Linux系统不断发展，已经成为最大的服务器系统软件了。}
+
+\qquad Linus虽然创建了Linux，但Linux的壮大是靠全世界热心的志愿者参与的，这么多人在世界各地为Linux编写代码，那Linux的代码是如何管理的呢？
+
+\qquad 事实是，在2002年以前，世界各地的志愿者把源代码文件通过diff的方式发给Linus，然后由Linus本人通过手工方式合并代码！
+
+\qquad 你也许会想，为什么Linus不把Linux代码放到版本控制系统里呢？不是有CVS、SVN这些免费的版本控制系统吗？因为Linus坚定地反对CVS和SVN，这些集中式的版本控制系统不但速度慢，而且必须联网才能使用。有一些商用的版本控制系统，虽然比CVS、SVN好用，但那是付费的，和Linux的开源精神不符。
+
+\qquad 不过，到了2002年，Linux系统已经发展了十年了，代码库之大让Linus很难继续通过手工方式管理了，社区的弟兄们也对这种方式表达了强烈不满，于是Linus选择了一个商业的版本控制系统BitKeeper，BitKeeper的东家BitMover公司出于人道主义精神，授权Linux社区免费使用这个版本控制系统。
+
+\qquad 安定团结的大好局面在2005年就被打破了，原因是Linux社区牛人聚集，不免沾染了一些梁山好汉的江湖习气。开发Samba的Andrew试图破解BitKeeper的协议（这么干的其实也不只他一个），被BitMover公司发现了（监控工作做得不错！），于是BitMover公司怒了，要收回Linux社区的免费使用权。
+
+\qquad Linus可以向BitMover公司道个歉，保证以后严格管教弟兄们，嗯，这是不可能的。实际情况是这样的：
+
+\qquad Linus花了两周时间自己用C写了一个分布式版本控制系统，这就是Git！一个月之内，Linux系统的源码已经由Git管理了！牛是怎么定义的呢？大家可以体会一下。
+
+\qquad Git迅速成为最流行的分布式版本控制系统，尤其是2008年，GitHub网站上线了，它为开源项目免费提供Git存储，无数开源项目开始迁移至GitHub，包括jQuery，PHP，Ruby等等。
+
+\qquad 历史就是这么偶然，如果不是当年BitMover公司威胁Linux社区，可能现在我们就没有免费而超级好用的Git了。
+
+\subsection{集中式vs分布式}
+
+\qquad Linus一直痛恨的CVS及SVN都是集中式的版本控制系统，而Git是分布式版本控制系统，集中式和分布式版本控制系统有什么区别呢？
+
+\qquad 先说集中式版本控制系统，版本库是集中存放在中央服务器的，而干活的时候，用的都是自己的电脑，所以要先从中央服务器取得最新的版本，然后开始干活，干完活了，再把自己的活推送给中央服务器。中央服务器就好比是一个图书馆，你要改一本书，必须先从图书馆借出来，然后回到家自己改，改完了，再放回图书馆。
+\begin{center}
+\includegraphics[scale=0.6]{2.jpeg}
+\end{center}
+\qquad 集中式版本控制系统最大的毛病就是必须联网才能工作，如果在局域网内还好，带宽够大，速度够快，可如果在互联网上，遇到网速慢的话，可能提交一个10M的文件就需要5分钟，这还不得把人给憋死啊。
+
+\qquad 那分布式版本控制系统与集中式版本控制系统有何不同呢？首先，分布式版本控制系统根本没有“中央服务器”，每个人的电脑上都是一个完整的版本库，这样，你工作的时候，就不需要联网了，因为版本库就在你自己的电脑上。既然每个人电脑上都有一个完整的版本库，那多个人如何协作呢？比方说你在自己电脑上改了文件A，你的同事也在他的电脑上改了文件A，这时，你们俩之间只需把各自的修改推送给对方，就可以互相看到对方的修改了。
+
+\qquad 和集中式版本控制系统相比，分布式版本控制系统的安全性要高很多，因为每个人电脑里都有完整的版本库，某一个人的电脑坏掉了不要紧，随便从其他人那里复制一个就可以了。而集中式版本控制系统的中央服务器要是出了问题，所有人都没法干活了。
+
+\qquad 在实际使用分布式版本控制系统的时候，其实很少在两人之间的电脑上推送版本库的修改，因为可能你们俩不在一个局域网内，两台电脑互相访问不了，也可能今天你的同事病了，他的电脑压根没有开机。因此，分布式版本控制系统通常也有一台充当“中央服务器”的电脑，但这个服务器的作用仅仅是用来方便“交换”大家的修改，没有它大家也一样干活，只是交换修改不方便而已。
+\begin{center}
+\includegraphics[scale=0.6]{3.jpeg}
+\end{center}
+\qquad 当然，Git的优势不单是不必联网这么简单，后面我们还会看到Git极其强大的分支管理，把SVN等远远抛在了后面。
+
+\qquad CVS作为最早的开源而且免费的集中式版本控制系统，直到现在还有不少人在用。由于CVS自身设计的问题，会造成提交文件不完整，版本库莫名其妙损坏的情况。同样是开源而且免费的SVN修正了CVS的一些稳定性问题，是目前用得最多的集中式版本库控制系统。
+
+\qquad 除了免费的外，还有收费的集中式版本控制系统，比如IBM的ClearCase（以前是Rational公司的，被IBM收购了），特点是安装比Windows还大，运行比蜗牛还慢，能用ClearCase的一般是世界500强，他们有个共同的特点是财大气粗，或者人傻钱多。
+
+\qquad 微软自己也有一个集中式版本控制系统叫VSS，集成在Visual Studio中。由于其反人类的设计，连微软自己都不好意思用了。
+
+\qquad 分布式版本控制系统除了Git以及促使Git诞生的BitKeeper外，还有类似Git的Mercurial和Bazaar等。这些分布式版本控制系统各有特点，但最快、最简单也最流行的依然是Git！
+\section{安装Git}
+
+\begin{sloppypar}  
+\qquad 最早Git是在Linux上开发的，很长一段时间内，Git也只能在Linux和Unix系统上跑。不过，慢慢地有人把它移植到了Windows上。现在，Git可以在Linux、Unix、Mac和Windows这几大平台上正常运行了。
+\end{sloppypar}
+\qquad{\textbf{在Linux上安装Git}}
+
+\qquad 首先，你可以试着输入git，看看系统有没有安装Git：
+
+\lstset{language=C}
+\begin{lstlisting}        %插入要显示的代码
+
+$ git
+The program 'git' is currently not installed. 
+You can install it by typing:
+sudo apt-get install git
+\end{lstlisting}
+
+\qquad 像上面的命令，有很多Linux会友好地告诉你Git没有安装，还会告诉你如何安装Git。如果你碰巧用Debian或Ubuntu Linux，通过一条{\color{red} sudo apt-get install git}就可以直接完成Git的安装，非常简单。
+
+\qquad 老一点的Debian或Ubuntu Linux，要把命令改为{\color{red}sudo apt-get install git-core}，因为以前有个软件也叫GIT（GNU Interactive Tools），结果Git就只能叫{\color{red}git-core}了。由于Git名气实在太大，后来就把GNU Interactive Tools改成{\color{red}gnuit，}{\color{red}git-core}正式改为{\color{red}git}。
+
+\qquad 如果是其他Linux版本，可以直接通过源码安装。先从Git官网下载源码，然后解压，依次输入：{\color{red}./config}，{\color{red}make}, {\color{red}sudo make install}这几个命令安装就好了。
+
+安装完成后，还需要最后一步设置，在命令行输入：
+
+\lstset{language=C}
+\begin{lstlisting} 
+$ git config --global user.name "Your Name"
+$ git config --global user.email "email@example.com"
+\end{lstlisting}
+
+\qquad 因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址。你也许会担心，如果有人故意冒充别人怎么办？这个不必担心，首先我们相信大家都是善良无知的群众，其次，真的有冒充的也是有办法可查的。
+
+\qquad 注意{\color{red} git config}命令的{\color{red}--global}参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。
+
+\begin{shaded}
+参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。
+\end{shaded}
+
+
+
+\section{创建版本库}
+\qquad 什么是版本库呢？版本库又名仓库，英文名repository，你可以简单理解成一个目录，这个目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以“还原”。
+
+\qquad 所以，创建一个版本库非常简单，首先，选择一个合适的地方，创建一个空目录：
+\lstset{language=C}
+\begin{lstlisting} 
+$ mkdir learngit
+$ cd learngit
+$ pwd
+/Users/michael/learngit
+\end{lstlisting}
+\qquad \textbf{\color{red}pwd} 命令用于显示当前目录。在我的Mac上，这个仓库位于/Users/michael/learngit。
+
+\qquad {\color{red}如果你使用Windows系统，为了避免遇到各种莫名其妙的问题，请确保目录名（包括父目录）不包含中文。}
+
+\qquad 第二步，通过git init命令把这个目录变成Git可以管理的仓库：
+
+\begin{lstlisting} 
+$ git init
+Initialized empty Git repository in /Users/learngit/.git/
+\end{lstlisting}
+
+\qquad 瞬间Git就把仓库建好了，而且告诉你是一个空的仓库（empty Git repository），细心的读者可以发现当前目录下多了一个.git的目录，这个目录是Git来跟踪管理版本库的，没事千万不要手动修改这个目录里面的文件，不然改乱了，就把Git仓库给破坏了。
+
+\qquad 如果你没有看到.git目录，那是因为这个目录默认是隐藏的，用ls -ah命令就可以看见。
+
+\qquad 也不一定必须在空目录下创建Git仓库，选择一个已经有东西的目录也是可以的。不过，不建议你使用自己正在开发的公司项目来学习Git，否则造成的一切后果概不负责。
+
+\subsection{把文件添加到版本库} 
+
+现在我们编写一个readme.txt文件，内容如下：
+
+\begin{shaded}
+Git is a version control system.\\
+Git is free software.
+\end{shaded}
+
+
+\qquad 一定要放到learngit目录下（子目录也行），因为这是一个Git仓库，放到其他地方Git再厉害也找不到这个文件。
+
+\qquad 和把大象放到冰箱需要3步相比，把一个文件放到Git仓库只需要两步。
+
+\qquad 第一步，用命令git add告诉Git，把文件添加到仓库：
+\begin{lstlisting} 
+$ git add readme.txt/
+\end{lstlisting}
+\qquad 执行上面的命令，没有任何显示，这就对了，Unix的哲学是“没有消息就是好消息”，说明添加成功。
+
+\qquad 第二步，用命令git commit告诉Git，把文件提交到仓库：
+\begin{lstlisting} 
+$ git commit -m "wrote a readme file"
+[master (root-commit) eaadf4e] wrote a readme file
+ 1 file changed, 2 insertions(+)
+ create mode 100644 readme.txt
+\end{lstlisting}
+\qquad 简单解释一下git commit命令，-m后面输入的是本次提交的说明，可以输入任意内容，当然最好是有意义的，这样你就能从历史记录里方便地找到改动记录。
+
+\qquad 嫌麻烦不想输入-m "xxx"行不行？确实有办法可以这么干，但是强烈不建议你这么干，因为输入说明对自己对别人阅读都很重要。实在不想输入说明的童鞋请自行Google，我不告诉你这个参数。
+
+\qquad git commit命令执行成功后会告诉你，1 file changed：1个文件被改动（我们新添加的readme.txt文件）；2 insertions：插入了两行内容（readme.txt有两行内容）。
+\qquad 为什么Git添加文件需要add，commit一共两步呢？因为commit可以一次提交很多文件，所以你可以多次add不同的文件，比如：
+\begin{lstlisting} 
+$ git add file1.txt
+$ git add file2.txt file3.txt
+$ git commit -m "add 3 files."
+\end{lstlisting}
+
+\subsection{小结}
+
+现在总结一下今天学的两点内容：
+
+初始化一个Git仓库，使用\fbox{\color{red}{git init}}命令。
+
+添加文件到Git仓库，分两步：
+
+    使用命令\fbox{\color{red}{git add <file>}}，注意，可反复多次使用，添加多个文件；\\
+    使用命令\fbox{\color{red}{git commit -m <message>}}，完成。
+    %-------------------\fbox{asd}%给文字加框
+ 
+
+
+\section{版本管理}
+\subsection{版本回退}
+\subsection{工作区和缓存区}
+\subsection{管理修改}
+\subsection{删除文件}
+\section{远程仓库}
+\qquad 到目前为止，我们已经掌握了如何在Git仓库里对一个文件进行时光穿梭，你再也不用担心文件备份或者丢失的问题了。
+
+\qquad 可是有用过集中式版本控制系统SVN的童鞋会站出来说，这些功能在SVN里早就有了，没看出Git有什么特别的地方。没错，如果只是在一个仓库里管理文件历史，Git和SVN真没啥区别。为了保证你现在所学的Git物超所值，将来绝对不会后悔，同时为了打击已经不幸学了SVN的童鞋，本章开始介绍Git的杀手级功能之一（注意是之一，也就是后面还有之二，之三……）：远程仓库。
+
+\qquad Git是分布式版本控制系统，同一个Git仓库，可以分布到不同的机器上。怎么分布呢？最早，肯定只有一台机器有一个原始版本库，此后，别的机器可以“克隆”这个原始版本库，而且每台机器的版本库其实都是一样的，并没有主次之分。
+
+\qquad 你肯定会想，至少需要两台机器才能玩远程库不是？但是我只有一台电脑，怎么玩？其实一台电脑上也是可以克隆多个版本库的，只要不在同一个目录下。不过，现实生活中是不会有人这么傻的在一台电脑上搞几个远程库玩，因为一台电脑上搞几个远程库完全没有意义，而且硬盘挂了会导致所有库都挂掉，所以我也不告诉你在一台电脑上怎么克隆多个仓库。
+
+\qquad 实际情况往往是这样，找一台电脑充当服务器的角色，每天24小时开机，其他每个人都从这个“服务器”仓库克隆一份到自己的电脑上，并且各自把各自的提交推送到服务器仓库里，也从服务器仓库中拉取别人的提交。
+
+\qquad 完全可以自己搭建一台运行Git的服务器，不过现阶段，为了学Git先搭个服务器绝对是小题大作。好在这个世界上有个叫{\color{blue}{GitHub}}的神奇的网站，从名字就可以看出，这个网站就是提供Git仓库托管服务的，所以，只要注册一个GitHub账号，就可以免费获得Git远程仓库。
+\qquad 在继续阅读后续内容前，请自行注册GitHub账号。由于你的本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，所以，需要一点设置：
+
+第1步：创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有\fbox{\color{red}{id-rsa}}和\fbox{\color{red}{id——rsa.pub}}这两个文件，如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key：
+
+\begin{lstlisting} 
+$ ssh-keygen -t rsa -C "youremail@example.com"
+\end{lstlisting}
+
+\qquad 你需要把邮件地址换成你自己的邮件地址，然后一路回车，使用默认值即可，由于这个Key也不是用于军事目的，所以也无需设置密码如果一切顺利的话，可以在用户主目录里找到\fbox{\color{red}{.ssh}}目录，里面有\fbox{\color{red}{id-rsa}}和\fbox{\color{red}{id-rsa.pub}}两个文件，这两个就是SSH Key的秘钥对，\fbox{\color{red}{id-rsa}}是私钥，不能泄露出去，\fbox{\color{red}{id-rsa.pub}}是公钥，可以放心地告诉任何人。
+
+\qquad 第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：
+
+然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴\fbox{\color{red}{id-rsa.pub}}文件的内容：
+
+\begin{center}
+\includegraphics[scale=0.6]{add_ssh_key.png}
+\end{center}
+
+点“Add Key”，你就应该看到已经添加的Key：
+
+\begin{center}
+\includegraphics[scale=0.6]{add_key.png}
+\end{center}
+
+\qquad 为什么GitHub需要SSH Key呢？因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。当然，GitHub允许你添加多个Key。假定你有若干电脑，你一会儿在公司提交，一会儿在家里提交，只要把每台电脑的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了。
+
+\qquad 最后友情提示，在GitHub上免费托管的Git仓库，任何人都可以看到喔（但只有你自己才能改）。所以，不要把敏感信息放进去。
+
+\qquad 如果你不想让别人看到Git库，有两个办法，一个是交点保护费，让GitHub把公开的仓库变成私有的，这样别人就看不见了（不可读更不可写）。另一个办法是自己动手，搭一个Git服务器，因为是你自己的Git服务器，所以别人也是看不见的。这个方法我们后面会讲到的，相当简单，公司内部开发必备。
+
+确保你拥有一个GitHub账号后，我们就即将开始远程仓库的学习。
+
+\subsection{添加远程仓库}
+\qquad 现在的情景是，你已经在本地创建了一个Git仓库后，又想在GitHub创建一个Git仓库，并且让这两个仓库进行远程同步，这样，GitHub上的仓库既可以作为备份，又可以让其他人通过该仓库来协作，真是一举多得。
+首先，登陆GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库：
+\begin{center}
+\includegraphics[scale=0.6]{4.png}
+\end{center}
+\qquad 在Repository name填入\fbox{\color{red}{learngit}} ，其他保持默认设置，点击“Create repository”按钮，就成功地创建了一个新的Git仓库：
+\begin{center}
+\includegraphics[scale=0.6]{5.png}
+\end{center}
+\qquad 目前，在GitHub上的这个\fbox{\color{red}{learngit}}仓库还是空的，GitHub告诉我们，可以从这个仓库克隆出新的仓库，也可以把一个已有的本地仓库与之关联，然后，把本地仓库的内容推送到GitHub仓库。
+
+\qquad 现在，我们根据GitHub的提示，在本地的\fbox{\color{red}{learngit}}仓库下运行命令：
+\begin{lstlisting} 
+$ git remote add origin git@github.com:michaelliao/learngit.git
+\end{lstlisting}
+
+请千万注意，把上面的michaelliao替换成你自己的GitHub账户名，否则，你在本地关联的就是我的远程库，关联没有问题，但是你以后推送是推不上去的，因为你的SSH Key公钥不在我的账户列表中。
+
+添加后，远程库的名字就是origin，这是Git默认的叫法，也可以改成别的，但是origin这个名字一看就知道是远程库。
+
+下一步，就可以把本地库的所有内容推送到远程库上：
+\begin{lstlisting} 
+$ git push -u origin master
+Counting objects: 20, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (15/15), done.
+Writing objects: 100% (20/20), 1.64 KiB | 560.00 KiB/s, done.
+Total 20 (delta 5), reused 0 (delta 0)
+remote: Resolving deltas: 100% (5/5), done.
+To github.com:michaelliao/learngit.git
+ * [new branch]      master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+\end{lstlisting}
+
+把本地库的内容推送到远程，用git push命令，实际上是把当前分支master推送到远程。
+
+由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
+
+推送成功后，可以立刻在GitHub页面中看到远程库的内容已经和本地一模一样：
+
+\begin{center}
+\includegraphics[scale=0.6]{6.png}
+\end{center}
+
+从现在起，只要本地作了提交，就可以通过命令：
+
+\begin{lstlisting} 
+$ git push origin master
+\end{lstlisting}
+
+把本地master分支的最新修改推送至GitHub，现在，你就拥有了真正的分布式版本库！
+
+\textbf{SSH警告}
+
+\qquad 当你第一次使用Git的clone或者push命令连接GitHub时，会得到一个警告：
+
+\begin{lstlisting}
+The authenticity of host 'github.com (xx.xx.xx.xx)' can't be established.
+RSA key fingerprint is xx.xx.xx.xx.xx.
+Are you sure you want to continue connecting (yes/no)?
+\end{lstlisting}
+
+\qquad 这是因为Git使用SSH连接，而SSH连接在第一次验证GitHub服务器的Key时，需要你确认GitHub的Key的指纹信息是否真的来自GitHub的服务器，输入yes回车即可。Git会输出一个警告，告诉你已经把GitHub的Key添加到本机的一个信任列表里了：
+\begin{lstlisting}
+Warning: Permanently added 'github.com' (RSA) to the list of known hosts.
+\end{lstlisting}
+
+这个警告只会出现一次，后面的操作就不会有任何警告了。
+
+如果你实在担心有人冒充GitHub服务器，输入yes前可以对照GitHub的RSA Key的指纹信息是否与SSH连接给出的一致。
+
+\textbf{SSH免密}\\
+通常我们会使用https方式克隆
+\begin{lstlisting}
+git clone https://github.com/Name/project.git
+\end{lstlisting}
+这样便会在你git push时候要求输入用户名和密码 
+解决的方法是使用ssh方式克隆仓库
+\begin{lstlisting}
+git clone git@github.com:Name/project.git
+\end{lstlisting}
+当如，如果你已经用https方式克隆了仓库，就不必删除仓库重新克隆，只需将 .git/config文件中的 
+\begin{shaded}
+url = https://github.com/Name/project.git 
+\end{shaded}
+一行改为 
+\begin{shaded}
+url = git@github.com:Name/project.git 
+\end{shaded}
+即可。\\
+\textbf{小结}
+
+\qquad 要关联一个远程库，使用命令git remote add origin git@server-name:path/repo-name.git；关联后，使用命令git push -u origin master第一次推送master分支的所有内容；此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；分布式版本系统的最大好处之一是在本地工作完全不需要考虑远程库的存在，也就是有没有联网都可以正常工作，而SVN在没有联网的时候是拒绝干活的！当有网络的时候，再把本地提交推送一下就完成了同步，真是太方便了！
+
+\subsection{从远程仓库克隆}
+\qquad 上次我们讲了先有本地库，后有远程库的时候，如何关联远程库。现在，假设我们从零开发，那么最好的方式是先创建远程库，然后，从远程库克隆。首先，登陆GitHub，创建一个新的仓库，名字叫gitskills：
+\begin{center}
+\includegraphics[scale=0.6]{github-init-repo.png}
+\end{center}
+\qquad 我们勾选Initialize this repository with a README，这样GitHub会自动为我们创建一个README.md文件。创建完毕后，可以看到README.md文件：
+\begin{center}
+\includegraphics[scale=0.6]{github-init-repo-2}
+\end{center}
+\qquad 现在，远程库已经准备好了，下一步是用命令git clone克隆一个本地库：
+\begin{lstlisting}
+$ git clone git@github.com:michaelliao/gitskills.git
+Cloning into 'gitskills'...
+remote: Counting objects: 3, done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 3
+Receiving objects: 100% (3/3), done.
+\end{lstlisting}
+注意把Git库的地址换成你自己的，然后进入gitskills目录看看，已经有README.md文件了：
+\begin{lstlisting}
+$ cd gitskills
+$ ls
+README.md
+\end{lstlisting}
+
+\qquad 如果有多个人协作开发，那么每个人各自从远程克隆一份就可以了。你也许还注意到，GitHub给出的地址不止一个，还可以用https://github.com/michaelliao/gitskills.git这样的地址。实际上，Git支持多种协议，默认的git://使用ssh，但也可以使用https等其他协议。
+
+使用https除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令，但是在某些只开放http端口的公司内部就无法使用ssh协议而只能用https。
+
+\textbf{小结}
+
+要克隆一个仓库，首先必须知道仓库的地址，然后使用git clone命令克隆。
+
+Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。
+
+\section{分支管理}
+\qquad 分支就是科幻电影里面的平行宇宙，当你正在电脑前努力学习Git的时候，另一个你正在另一个平行宇宙里努力学习SVN。如果两个平行宇宙互不干扰，那对现在的你也没啥影响。不过，在某个时间点，两个平行宇宙合并了，结果，你既学会了Git又学会了SVN！
+\begin{center}
+\includegraphics[scale=0.6]{study_git.png}
+\end{center}
+\qquad 分支在实际中有什么用呢？假设你准备开发一个新功能，但是需要两周才能完成，第一周你写了percent of 50的代码，如果立刻提交，由于代码还没写完，不完整的代码库会导致别人不能干活了。如果等代码全部写完再一次提交，又存在丢失每天进度的巨大风险。现在有了分支，就不用怕了。你创建了一个属于你自己的分支，别人看不到，还继续在原来的分支上正常工作，而你在自己的分支上干活，想提交就提交，直到开发完毕后，再一次性合并到原来的分支上，这样，既安全，又不影响别人工作。其他版本控制系统如SVN等都有分支管理，但是用过之后你会发现，这些版本控制系统创建和切换分支比蜗牛还慢，简直让人无法忍受，结果分支功能成了摆设，大家都不去用。但Git的分支是与众不同的，无论创建、切换和删除分支，Git在1秒钟之内就能完成！无论你的版本库是1个文件还是1万个文件。
+\subsection{创建与合并分支}
+\qquad 在{\color{blue}{版本回退}}里，你已经知道，每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即\fbox{master}分支。\fbox{HEAD}严格来说不是指向提交，而是指向\fbox{master}，\fbox{master}才是指向提交的，所以，\fbox{HEAD}指向的就是当前分支。
+
+一开始的时候，\fbox{master}分支是一条线，Git用\fbox{master}指向最新的提交，再用\fbox{HEAD}指向\fbox{master}，就能确定当前分支，以及当前分支的提交点：
+\begin{center}
+\includegraphics[scale=0.6]{head1.png}
+\end{center}
+每次提交，\fbox{master}分支都会向前移动一步，这样，随着你不断提交，\fbox{master}分支的线也越来越长
+当我们创建新的分支，例如dev时，Git新建了一个指针叫\fbox{dev}，指向\fbox{master}相同的提交，再把HEAD指向\fbox{dev}，就表示当前分支在\fbox{dev}上：
+\begin{center}
+\includegraphics[scale=0.6]{head2.png}
+\end{center}
+你看，Git创建一个分支很快，因为除了增加一个\fbox{dev}指针，改改\fbox{HEAD} 的指向，工作区的文件都没有任何变化！
+不过，从现在开始，对工作区的修改和提交就是针对\fbox{dev}分支了，比如新提交一次后，\fbox{dev}指针往前移动一步，而\fbox{master}指针不变：
+\begin{center}
+\includegraphics[scale=0.6]{head3.png}
+\end{center}
+假如我们在\fbox{dev}上的工作完成了，就可以把\fbox{dev}合并到\fbox{master}上。Git怎么合并呢？最简单的方法，就是直接把master指向\fbox{dev}的当前提交，就完成了合并：
+\begin{center}
+\includegraphics[scale=0.6]{head4.png}
+\end{center}
+所以Git合并分支也很快！就改改指针，工作区内容也不变！
+
+合并完分支后，甚至可以删除\fbox{dev}分支。删除\fbox{dev}分支就是把\fbox{dev}指针给删掉，删掉后，我们就剩下了一条\fbox{master}分支：
+\begin{center}
+\includegraphics[scale=0.6]{head5.png}
+\end{center}
+真是太神奇了，你看得出来有些提交是通过分支完成的吗？
+
+下面开始实战。
+
+首先，我们创建dev分支，然后切换到dev分支：
+
+\begin{lstlisting}
+$ git checkout -b dev
+Switched to a new branch 'dev'
+\end{lstlisting}
+
+git checkout命令加上-b参数表示创建并切换，相当于以下两条命令：
+
+\begin{lstlisting}
+$ git branch dev
+$ git checkout dev
+Switched to branch 'dev'
+\end{lstlisting}
+
+
+然后，用git branch命令查看当前分支：
+
+\begin{lstlisting}
+$ git branch
+* dev
+  master
+\end{lstlisting}
+
+git branch命令会列出所有分支，当前分支前面会标一个*号。
+
+然后，我们就可以在dev分支上正常提交，比如对readme.txt做个修改，加上一行：
+
+Creating a new branch is quick.
+
+然后提交：
+
+\begin{lstlisting}
+$ git add readme.txt 
+$ git commit -m "branch test"
+[dev b17d20e] branch test
+ 1 file changed, 1 insertion(+)
+\end{lstlisting}
+
+现在，dev分支的工作完成，我们就可以切换回master分支：
+\begin{lstlisting}
+$ git checkout master
+Switched to branch 'master'
+\end{lstlisting}
+切换回master分支后，再查看一个readme.txt文件，刚才添加的内容不见了！因为那个提交是在dev分支上，而master分支此刻的提交点并没有变：
+
+\begin{center}
+\includegraphics[scale=0.6]{head6.png}\\
+\end{center}
+现在，我们把dev分支的工作成果合并到master分支上：
+
+\begin{lstlisting}
+$ git merge dev
+Updating d46f35e..b17d20e
+Fast-forward
+ readme.txt | 1 +
+ 1 file changed, 1 insertion(+)
+\end{lstlisting}
+
+git merge命令用于合并指定分支到当前分支。合并后，再查看readme.txt的内容，就可以看到，和dev分支的最新提交是完全一样的。
+
+注意到上面的Fast-forward信息，Git告诉我们，这次合并是“快进模式”，也就是直接把master指向dev的当前提交，所以合并速度非常快。
+
+当然，也不是每次合并都能Fast-forward，我们后面会讲其他方式的合并。
+
+合并完成后，就可以放心地删除dev分支了：
+\begin{lstlisting}
+$ git branch -d dev
+Deleted branch dev (was b17d20e).
+\end{lstlisting}
+删除后，查看branch，就只剩下master分支了：
+\begin{lstlisting}
+$ git branch
+* master
+\end{lstlisting}
+因为创建、合并和删除分支非常快，所以Git鼓励你使用分支完成某个任务，合并后再删掉分支，这和直接在master分支上工作效果是一样的，但过程更安全。
+
+\textbf{•}{小结}
+
+Git鼓励大量使用分支：
+
+查看分支：\fbox{git branch}
+
+创建分支：\fbox{git branch <name>}
+
+切换分支：\fbox{git checkout <name>}
+
+创建+切换分支：\fbox{git checkout -b <name>}
+
+合并某分支到当前分支：\fbox{git merge <name>}
+
+删除分支：\fbox{git branch -d <name>}
+
+\subsection{解决冲突}
+\subsection{分支管理策略}
+\subsection{Bug分支}
+\subsection{Feature分支}
+\subsection{多人协作}
+\subsection{Rebase}
+\section{标签管理}
+\qquad 发布一个版本时，我们通常先在版本库中打一个标签（tag），这样，就唯一确定了打标签时刻的版本。将来无论什么时候，取某个标签的版本，就是把那个打标签的时刻的历史版本取出来。所以，标签也是版本库的一个快照。Git的标签虽然是版本库的快照，但其实它就是指向某个commit的指针（跟分支很像对不对？但是分支可以移动，标签不能移动），所以，创建和删除标签都是瞬间完成的。
+
+Git有commit，为什么还要引入tag？
+
+“请把上周一的那个版本打包发布，commit号是6a5819e...”
+
+“一串乱七八糟的数字不好找！”
+
+如果换一个办法：
+
+“请把上周一的那个版本打包发布，版本号是v1.2”
+
+“好的，按照tag v1.2查找commit就行！”
+
+所以，tag就是一个让人容易记住的有意义的名字，它跟某个commit绑在一起。
+
+\subsection{创建标签}
+
+在Git中打标签非常简单，首先，切换到需要打标签的分支上：
+
+\begin{lstlisting}
+$ git branch
+* dev
+  master
+$ git checkout master
+Switched to branch 'master'
+\end{lstlisting}
+
+然后，敲命令git tag <name>就可以打一个新标签：
+
+\begin{lstlisting}
+$ git tag v1.0
+\end{lstlisting}
+
+可以用命令git tag查看所有标签：
+
+\begin{lstlisting}
+$ git tag
+v1.0
+\end{lstlisting}
+
+默认标签是打在最新提交的commit上的。有时候，如果忘了打标签，比如，现在已经是周五了，但应该在周一打的标签没有打，怎么办？
+
+方法是找到历史提交的commit id，然后打上就可以了：
+\begin{lstlisting}
+$ git log --pretty=oneline --abbrev-commit
+12a631b (HEAD -> master, tag: v1.0, origin/master) merged bug fix 101
+4c805e2 fix bug 101
+e1e9c68 merge with no-ff
+f52c633 add merge
+cf810e4 conflict fixed
+5dc6824 & simple
+14096d0 AND simple
+b17d20e branch test
+d46f35e remove test.txt
+b84166e add test.txt
+519219b git tracks changes
+e43a48b understand how stage works
+1094adb append GPL
+e475afc add distributed
+eaadf4e wrote a readme file
+\end{lstlisting}
+比方说要对add merge这次提交打标签，它对应的commit id是f52c633，敲入命令：
+\begin{lstlisting}
+$ git tag v0.9 f52c633
+\end{lstlisting}
+再用命令git tag查看标签：
+\begin{lstlisting}
+$ git tag
+v0.9
+v1.0
+\end{lstlisting}
+注意，标签不是按时间顺序列出，而是按字母排序的。可以用git show <tagname>查看标签信息：
+\begin{lstlisting}
+$ git show v0.9
+commit f52c63349bc3c1593499807e5c8e972b82c8f286 (tag: v0.9)
+Author: Michael Liao <askxuefeng@gmail.com>
+Date:   Fri May 18 21:56:54 2018 +0800
+
+    add merge
+
+diff --git a/readme.txt b/readme.txt
+...
+\end{lstlisting}
+可以看到，v0.9确实打在add merge这次提交上。
+
+还可以创建带有说明的标签，用-a指定标签名，-m指定说明文字：
+\begin{lstlisting}
+$ git tag -a v0.1 -m "version 0.1 released" 1094adb
+\end{lstlisting}
+用命令git show <tagname>可以看到说明文字：
+\begin{lstlisting}
+$ git show v0.1
+tag v0.1
+Tagger: Michael Liao <askxuefeng@gmail.com>
+Date:   Fri May 18 22:48:43 2018 +0800
+
+version 0.1 released
+
+commit 1094adb7b9b3807259d8cb349e7df1d4d6477073 (tag: v0.1)
+Author: Michael Liao <askxuefeng@gmail.com>
+Date:   Fri May 18 21:06:15 2018 +0800
+
+    append GPL
+
+diff --git a/readme.txt b/readme.txt
+...
+\end{lstlisting}
+
+\textbf{小结}
+
+ $   \bullet$命令git tag <tagname>用于新建一个标签，默认为HEAD，也可以指定一个commit id；
+
+ $   \bullet $命令git tag -a <tagname> -m "blablabla..."可以指定标签信息；
+
+$   \bullet$t命令git tag可以查看所有标签。
+
+
+\subsection{操作标签}
+
+如果标签打错了，也可以删除：
+\begin{lstlisting}
+$ git tag -d v0.1
+Deleted tag 'v0.1' (was f15b0dd)
+\end{lstlisting}
+因为创建的标签都只存储在本地，不会自动推送到远程。所以，打错的标签可以在本地安全删除。如果要推送某个标签到远程，使用命令git push origin <tagname>：
+\begin{lstlisting}
+$ git push origin v1.0
+Total 0 (delta 0), reused 0 (delta 0)
+To github.com:michaelliao/learngit.git
+ * [new tag]         v1.0 -> v1.0
+\end{lstlisting}
+或者，一次性推送全部尚未推送到远程的本地标签：
+\begin{lstlisting}
+$ git push origin --tags
+Total 0 (delta 0), reused 0 (delta 0)
+To github.com:michaelliao/learngit.git
+ * [new tag]         v0.9 -> v0.9
+\end{lstlisting}
+如果标签已经推送到远程，要删除远程标签就麻烦一点，先从本地删除：
+\begin{lstlisting}
+$ git tag -d v0.9
+Deleted tag 'v0.9' (was f52c633)
+\end{lstlisting}
+然后，从远程删除。删除命令也是push，但是格式如下：
+\begin{lstlisting}
+$ git push origin :refs/tags/v0.9
+To github.com:michaelliao/learngit.git
+ - [deleted]         v0.9
+\end{lstlisting}
+要看看是否真的从远程库删除了标签，可以登陆GitHub查看。
+
+\textbf{小结}
+
+$\bullet$    命令git push origin <tagname>可以推送一个本地标签；
+
+$\bullet$     命令git push origin --tags可以推送全部未推送过的本地标签；
+
+ $\bullet$    命令git tag -d <tagname>可以删除一个本地标签；
+
+   $\bullet$  命令git push origin :refs/tags/<tagname>可以删除一个远程标签。
+
+
+
+\section{使用GitHub}
+\qquad 我们一直用GitHub作为免费的远程仓库，如果是个人的开源项目，放到GitHub上是完全没有问题的。其实GitHub还是一个开源协作社区，通过GitHub，既可以让别人参与你的开源项目，也可以参与别人的开源项目。
+
+\qquad 在GitHub出现以前，开源项目开源容易，但让广大人民群众参与进来比较困难，因为要参与，就要提交代码，而给每个想提交代码的群众都开一个账号那是不现实的，因此，群众也仅限于报个bug，即使能改掉bug，也只能把diff文件用邮件发过去，很不方便。
+
+\qquad 但是在GitHub上，利用Git极其强大的克隆和分支功能，广大人民群众真正可以第一次自由参与各种开源项目了。
+
+\qquad 如何参与一个开源项目呢？比如人气极高的bootstrap项目，这是一个非常强大的CSS框架，你可以访问它的项目主页https://github.com/twbs/bootstrap，点“Fork”就在自己的账号下克隆了一个bootstrap仓库，然后，从自己的账号下clone:
+
+\begin{shaded}
+git clone git@github.com:michaelliao/bootstrap.git
+\end{shaded}
+
+\qquad 一定要从自己的账号下clone仓库，这样你才能推送修改。如果从bootstrap的作者的仓库地址git@github.com:twbs/bootstrap.git克隆，因为没有权限，你将不能推送修改。
+
+\qquad Bootstrap的官方仓库twbs/bootstrap、你在GitHub上克隆的仓库my/bootstrap，以及你自己克隆到本地电脑的仓库，他们的关系就像下图显示的那样：
+\begin{center}
+\includegraphics[scale=0.6]{github.png}
+\end{center}
+\qquad 如果你想修复bootstrap的一个bug，或者新增一个功能，立刻就可以开始干活，干完后，往自己的仓库推送。如果你希望bootstrap的官方库能接受你的修改，你就可以在GitHub上发起一个pull request。当然，对方是否接受你的pull request就不一定了。如果你没能力修改bootstrap，但又想要试一把pull request，那就Fork一下我的仓库：https://github.com/michaelliao/learngit，创建一个your-github-id.txt的文本文件，写点自己学习Git的心得，然后推送一个pull request给我，我会视心情而定是否接受。
+
+\textbf{小结}
+
+$\bullet$ 在GitHub上，可以任意Fork开源仓库；
+
+$\bullet$ 自己拥有Fork后的仓库的读写权限；
+
+$\bullet$ 可以推送pull request给官方仓库来贡献代码。
+
+
+\section{自定义Git}
+
+\qquad 在远程仓库一节中，我们讲了远程仓库实际上和本地仓库没啥不同，纯粹为了7x24小时开机并交换大家的修改。GitHub就是一个免费托管开源代码的远程仓库。但是对于某些视源代码如生命的商业公司来说，既不想公开源代码，又舍不得给GitHub交保护费，那就只能自己搭建一台Git服务器作为私有仓库使用。搭建Git服务器需要准备一台运行Linux的机器，强烈推荐用Ubuntu或Debian，这样，通过几条简单的apt命令就可以完成安装。假设你已经有sudo权限的用户账号，下面，正式开始安装。
+
+第一步，安装git：
+\begin{lstlisting}
+$ sudo apt-get install git
+\end{lstlisting}
+第二步，创建一个git用户，用来运行git服务：
+
+\begin{lstlisting}
+$ sudo adduser git
+\end{lstlisting}
+
+第三步，创建证书登录：
+
+\qquad 收集所有需要登录的用户的公钥，就是他们自己的id-rsa.pub文件，把所有公钥导入到/home/git/.ssh/authorized-keys文件里，一行一个。
+
+第四步，初始化Git仓库：
+
+\qquad 先选定一个目录作为Git仓库，假定是/srv/sample.git，在/srv目录下输入命令：
+\begin{lstlisting}
+$ sudo git init --bare sample.git
+\end{lstlisting}
+\qquad Git就会创建一个裸仓库，裸仓库没有工作区，因为服务器上的Git仓库纯粹是为了共享，所以不让用户直接登录到服务器上去改工作区，并且服务器上的Git仓库通常都以.git结尾。然后，把owner改为git：
+\begin{lstlisting}
+$ sudo chown -R git:git sample.git
+\end{lstlisting}
+第五步，禁用shell登录：
+
+\qquad 出于安全考虑，第二步创建的git用户不允许登录shell，这可以通过编辑/etc/passwd文件完成。找到类似下面的一行：
+\begin{lstlisting}
+git:x:1001:1001:,,,:/home/git:/bin/bash
+\end{lstlisting}
+改为：
+\begin{lstlisting}
+git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell
+\end{lstlisting}
+\qquad 这样，git用户可以正常通过ssh使用git，但无法登录shell，因为我们为git用户指定的git-shell每次一登录就自动退出。
+
+第六步，克隆远程仓库：
+
+\qquad 现在，可以通过git clone命令克隆远程仓库了，在各自的电脑上运行：
+\begin{lstlisting}
+$ git clone git@server:/srv/sample.git
+Cloning into 'sample'...
+warning: You appear to have cloned an empty repository.
+\end{lstlisting}
+剩下的推送就简单了。
+
+\textbf{管理公钥}
+
+\qquad 如果团队很小，把每个人的公钥收集起来放到服务器的/home/git/.ssh/authorized-keys文件里就是可行的。如果团队有几百号人，就没法这么玩了，这时，可以用Gitosis来管理公钥。这里我们不介绍怎么玩Gitosis了，几百号人的团队基本都在500强了，相信找个高水平的Linux管理员问题不大。
+
+\textbf{管理权限}
+
+\qquad 有很多不但视源代码如生命，而且视员工为窃贼的公司，会在版本控制系统里设置一套完善的权限控制，每个人是否有读写权限会精确到每个分支甚至每个目录下。因为Git是为Linux源代码托管而开发的，所以Git也继承了开源社区的精神，不支持权限控制。不过，因为Git支持钩子（hook），所以，可以在服务器端编写一系列脚本来控制提交等操作，达到权限控制的目的。Gitolite就是这个工具。
+
+\qquad 这里我们也不介绍Gitolite了，不要把有限的生命浪费到权限斗争中。
+
+\textbf{小结}
+
+$\bullet$    搭建Git服务器非常简单，通常10分钟即可完成；
+
+$\bullet$    要方便管理公钥，用Gitosis；
+
+ $\bullet$   要像SVN那样变态地控制权限，用Gitolite。
+
+
+\end{CJK}
+\end{document}
